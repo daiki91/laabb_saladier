@@ -1,17 +1,34 @@
 from tkinter import *
-from tkinter import ttk, messagebox
+import tkinter as tk
+from tkinter import messagebox
+import pymysql
+from PIL import Image, ImageTk
 
-class formulaire:
+class Formulaire:
     def __init__(self, root):
         self.root = root
         self.root.title("Formulaire")
-        self.root.geometry("1920x1080+0+0")
+        self.root.geometry("780x520+250+100")
+        
+        # Chargement de l'image de fond
+        self.icon = ImageTk.PhotoImage(file='daiki.png')
+        self.lbl = tk.Label(self.root, image=self.icon, bg='#ddd', compound="top")
+        self.lbl.pack(pady=15)
 
         # Champs du formulaire
-        inscription = Frame(self.root, bg="grey")
-        inscription.pack(fill=BOTH, expand=True)
+        inscription = Frame(self.root)
+                # Création d'une couleur semi-transparente (blanc avec 50% d'opacité)
+        bg_color = "#ffffff"  # Couleur blanche
+        bg_color_alpha = bg_color   # Ajout de 80 pour 50% d'opacité (hexadécimal)
+        
+        inscription.configure(bg=bg_color_alpha)  # Définition de la couleur semi-transparente comme fond
 
-        title = Label(inscription, text="Creation de compte", font=("Arial", 20, "bold"), fg="orange")
+
+
+        inscription.pack(fill=BOTH, expand=True)
+        inscription.place(x=100, y=50, width=700, height=400)
+
+        title = Label(inscription, text="Creation de compte", font=("Arial", 20, "bold"), bg="blue", fg="grey")
         title.pack(pady=20)
 
         # Nom
@@ -33,7 +50,7 @@ class formulaire:
         self.ent_email.pack()
 
         # Mot de passe
-        lbl_password = Label(inscription, text="Mot de passe:")
+        lbl_password = Label(inscription, text="Mot de passe:", font=("times new roman", 15), fg="black")
         lbl_password.pack()
         self.ent_password = Entry(inscription, show="*")
         self.ent_password.pack()
@@ -48,9 +65,14 @@ class formulaire:
         prenom = self.ent_prenom.get()
         email = self.ent_email.get()
         password = self.ent_password.get()
-        
 
+        # Here you can add code to validate and process the form data
+        # For now, let's just print the data
+        print("Nom:", nom)
+        print("Prenom:", prenom)
+        print("Email:", email)
+        print("Mot de passe:", password)
 
 root = Tk()
-app = formulaire(root)
+app = Formulaire(root)
 root.mainloop()
